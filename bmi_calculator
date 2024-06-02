@@ -1,0 +1,27 @@
+def cal_bmi(weight, height):
+    bmi = weight / (height * height)
+    return bmi
+
+def categories_bmi(bmi):
+    if bmi <= 18.5:
+        category = "underweight"
+    elif bmi <= 24.9:
+        category = "normal"
+    elif bmi <= 29.9:
+        category = "overweight"
+    else:
+        category = "obese"
+    return category
+
+if __name__ == "__main__":
+    try:
+        weight = float(input('Enter your weight in kg: '))
+        height = float(input('Enter your height in m: '))
+        if weight <= 0 or height <= 0:
+            raise ValueError("Weight and height must be positive numbers.")
+        bmi = cal_bmi(weight, height)
+        category = categories_bmi(bmi)
+        print(f"Your BMI is: {bmi:.2f}")
+        print(f"BMI category: {category}")
+    except ValueError as muskan:
+        print(f"Error: {muskan}")
