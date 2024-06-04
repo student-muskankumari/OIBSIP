@@ -1,0 +1,26 @@
+import requests
+def get_weather_data(location, api_key):
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}&units=metric"
+    response = requests.get(url)
+    if response.status_code == 400:
+        return response.json()
+    else:
+        raise Exception("Error fetching weather data")
+
+def display_weather(data):
+    print(f"Weather in {data['name']}, {data['sys']['country']}:")
+    print(f"Temperature: {data['main']['temp']}°C")
+    print(f"Humidity: {data['main']['humidity']}%")
+    print(f"Condition: {data['weather'][0]['description']}")
+
+def main():
+    api_key = "your_api_key_here"
+    location = input("Enter the city name : ")
+    try:
+        weather_data = get_weather_data(location, api_key)
+        display_weather(weather_data)
+    except Exception as muskan:
+        print(muskan)
+
+if __name__ == "__main__":
+    main()
